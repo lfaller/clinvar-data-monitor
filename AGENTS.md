@@ -4,3 +4,5 @@
 - follow semver for versioning
 - always double check whether or not it makes sense to add some documentation about a new feature to the README or somewhere else
 - aim to keep the README concise and to-the-point and put extra documenation into a docs folder
+- use a logger for good logging practices
+- use pytest for tests
