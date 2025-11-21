@@ -1,0 +1,76 @@
+# ClinVar Data Quality Monitor Configuration
+# Copy this file to config/config.yaml and customize for your environment
+
+clinvar:
+  # ClinVar FTP source URLs
+  source_url: "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz"
+  checksum_url: "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz.md5"
+
+  # Local download directory
+  download_dir: "data/downloads"
+
+filtering:
+  # Enable/disable filtering
+  enabled: false
+
+  # Filter by chromosomes (null/empty list = all chromosomes)
+  # chromosomes: ["1", "2", "3", "X", "Y"]
+  chromosomes: null
+
+  # Filter by clinical significance (null = all)
+  # clinical_significance_filter: ["Pathogenic", "Likely pathogenic"]
+  clinical_significance_filter: null
+
+quilt:
+  # S3 bucket for Quilt registry
+  bucket: "your-clinvar-registry"
+
+  # Package name in Quilt
+  package_name: "biodata/clinvar"
+
+  # Full registry URL
+  registry: "s3://your-clinvar-registry"
+
+  # Push data to registry (set to false for testing)
+  push_to_registry: true
+
+quality:
+  # Quality assessment thresholds
+  thresholds:
+    min_quality_score: 75
+    max_null_percentage: 15
+    max_conflict_rate: 5
+    max_drift_percentage: 20
+
+  # Output directory for quality reports
+  output_dir: "output/quality_reports"
+
+alerts:
+  # Enable alerting system
+  enabled: false
+
+  # Email notifications
+  email: null  # e.g., "your-email@example.com"
+
+  # Slack webhook for notifications
+  slack_webhook: null  # e.g., "https://hooks.slack.com/services/..."
+
+scheduling:
+  # Days between checks for new releases
+  check_interval_days: 7
+
+  # Automatically run pipeline when new release detected
+  auto_run: false
+
+logging:
+  # Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+
+  # Log directory
+  log_dir: "logs"
+
+  # Log to file
+  file_logging: true
+
+  # Log to console
+  console_logging: true
