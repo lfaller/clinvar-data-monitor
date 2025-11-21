@@ -1,0 +1,6 @@
+- follow test driven development (TDD) best practices (i.e. always write tests first)
+- use poetry for managing the project
+- maintain a changelog
+- follow semver for versioning
+- always double check whether or not it makes sense to add some documentation about a new feature to the README or somewhere else
+- aim to keep the README concise and to-the-point and put extra documenation into a docs folder
