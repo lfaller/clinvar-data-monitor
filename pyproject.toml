@@ -2,7 +2,7 @@
 name = "clinvar-data-monitor"
 version = "0.1.0"
 description = "Automated data quality monitoring for ClinVar with Quilt versioning"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Lina Faller <lina.faller@gmail.com>"]
 readme = "README.md"
 packages = [{include = "src"}]
 
