@@ -8,18 +8,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial project setup with Poetry configuration
-- Project directory structure (src/, config/, scripts/, tests/, notebooks/)
-- Configuration templates (config.yaml, .env)
-- CI/CD workflow template (.github/workflows/ci.yml)
-- Development tools: pytest, black, flake8, isort, mypy
-- Documentation guidelines (AGENTS.md)
+- Nothing yet
+
+## [0.2.0] - Phase 1: Foundation - 2025-11-21
+
+### Added
+
+#### Core Modules
+- **ClinVarDownloader** (`src/downloader.py`)
+  - Download ClinVar data from NCBI FTP with retry logic (exponential backoff)
+  - MD5 checksum validation
+  - Gzip decompression with automatic filename extraction
+  - Full `download_and_verify()` workflow
+  - Comprehensive error handling and logging
+  - Tests: 16 passing tests
+
+- **QualityChecker** (`src/quality_checker.py`)
+  - Load variant data from TSV files
+  - Calculate basic metrics: row/column counts, null percentages, duplicates
+  - Calculate ClinVar-specific metrics: clinical significance distribution, review status
+  - Count conflicting interpretations
+  - Generate quality reports with JSON serialization
+  - Quality scoring algorithm (0-100 scale) with weighted factors
+  - Save reports with timestamp-based filenames
+  - Tests: 24 passing tests
+
+- **QuiltPackager** (`src/quilt_packager.py`)
+  - Create Quilt packages locally
+  - Add data files to packages
+  - Attach quality reports as metadata
+  - Set searchable metadata tags
+  - Validate data files and quality reports
+  - Push packages to S3 registries (with configurable toggle)
+  - Parse package names and manage namespaces
+  - Extract version information from filenames
+  - Tests: 25 passing tests
+
+- **ClinVarPipeline** (`scripts/run_pipeline.py`)
+  - Orchestrate complete workflow: download → assess → package
+  - Load configuration from YAML files
+  - Setup logging with file and console handlers
+  - Initialize all modules
+  - Error handling with graceful failures
+  - Pipeline execution summary reporting
+  - Command-line interface with config and log-level options
+  - Tests: 16 passing tests
+
+#### Documentation
+- Comprehensive development guide (`docs/development.md`)
+- Architecture documentation (`docs/architecture.md`)
+- Configuration guide (`docs/configuration.md`)
+- Documentation index (`docs/README.md`)
+
+#### Testing Infrastructure
+- 81 total tests (all passing)
+- TDD approach with tests written first
+- Comprehensive mocking for external dependencies
+- Coverage reporting with pytest-cov
+- Fixtures for reusable test data
 
 ### Changed
-- Updated README with comprehensive setup and development instructions
+- Updated pyproject.toml with relaxed quilt3 version constraints (>=5.0)
+- Updated Python requirement to ^3.8.1 for flake8 compatibility
+- Enhanced README with Poetry-specific instructions
 
 ### Fixed
-- N/A
+- DateTime deprecation warnings (use timezone-aware UTC)
+- Package naming and namespace parsing
+- Quality score calculation bounds (0-100)
 
 ## [0.1.0] - 2025-11-21
 

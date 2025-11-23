@@ -132,6 +132,111 @@ Set environment variables in `.env`:
 
 ## Development
 
+### Testing with Sample Data
+
+For quick testing without downloading actual ClinVar data or requiring AWS credentials, use the built-in sample data demonstration:
+
+#### Quick Module Test
+
+Test all modules with sample data in a few seconds:
+
+```bash
+poetry run python scripts/test_modules.py
+```
+
+This script demonstrates:
+- **QualityChecker**: Loading variant data and calculating quality metrics
+- **QuiltPackager**: Package initialization and metadata generation
+- Sample output: Quality score, clinical significance distribution, review status breakdown
+
+Example output:
+```
+================================================================================
+ClinVar Data Quality Monitor - Module Demonstration
+================================================================================
+
+1. LOADING SAMPLE DATA
+✓ Sample data file found: data/sample_variant_summary.txt
+
+2. QUALITY ASSESSMENT
+✓ QualityChecker initialized
+✓ Loaded 10 variants with 8 columns
+✓ Quality report generated
+
+Quality Report Summary:
+  - Quality Score: 62.6/100
+  - Row Count: 10
+  - Column Count: 8
+  - Null Percentage: 3.8%
+  - Duplicate Count: 0
+  - Conflicting Interpretations: 6
+  - 4-Star Percentage: 30.0%
+
+3. QUILT PACKAGING
+✓ QuiltPackager initialized
+✓ Quality report validation: True
+
+✅ All modules working correctly!
+```
+
+The sample quality report is saved to: `output/quality_reports/quality_report_YYYY-MM-DD.json`
+
+#### View the Generated Report
+
+```bash
+# See the latest quality report in JSON format
+cat output/quality_reports/quality_report_*.json | python -m json.tool
+```
+
+#### Sample Data & Package Storage
+
+**Sample Data Location**: `data/sample_variant_summary.txt`
+
+The sample dataset contains:
+- 10 realistic ClinVar variants
+- Full set of columns: VariationID, Type, Locations, Protein Change, Symptom(s), ClinicalSignificance, ReviewStatus, ConflictingInterpretations
+- Mix of pathogenic/benign classifications
+- Varying review status (1-4 stars)
+
+**Quilt Package Storage**:
+- **Local (testing)**: When `push_to_registry: false`, packages are built locally in Quilt's registry
+  - Access via: `quilt3.Package.browse("namespace/package_name")`
+  - Storage: Managed by Quilt internally
+
+- **S3 Registry (production)**: When `push_to_registry: true` and AWS credentials are configured
+  - Pushed to S3 bucket specified in config
+  - Requires AWS credentials (Access Key ID + Secret Key)
+  - No credentials needed for local testing mode
+
+### Running Tests
+
+All tests use mocking to avoid external dependencies:
+
+```bash
+# Run all tests with coverage
+poetry run pytest
+
+# Run specific test file
+poetry run pytest tests/test_quality_checker.py -v
+
+# Run with coverage report
+poetry run pytest --cov=src --cov-report=html
+```
+
+**Current Test Coverage:**
+- 81 total tests (all passing)
+- ClinVarDownloader: 16 tests
+- QualityChecker: 24 tests
+- QuiltPackager: 25 tests
+- ClinVarPipeline: 16 tests
+
+All tests use mocking for:
+- NCBI FTP downloads
+- S3 operations
+- Quilt package operations
+
+No AWS credentials or actual network access required.
+
 ### Running the Pipeline
 
 ```bash
@@ -145,18 +250,14 @@ poetry run python scripts/run_pipeline.py --phase 2
 poetry run python scripts/run_pipeline.py --phase 3
 ```
 
-### Running Tests
+For testing the pipeline with sample data (without actual downloads):
 
 ```bash
-# Run all tests with coverage
-poetry run pytest
-
-# Run specific test file
-poetry run pytest tests/test_quality_checker.py -v
-
-# Run with coverage report
-poetry run pytest --cov=src --cov-report=html
+# Use the test configuration
+poetry run python scripts/run_pipeline.py --config config/test_config.yaml
 ```
+
+Note: This requires sample data to be present in `data/`
 
 ### Code Quality
 
