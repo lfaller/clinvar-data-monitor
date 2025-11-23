@@ -1,0 +1,11 @@
+VariationID	Type	Locations	Protein Change	Symptom(s)/phenotype(s)	ClinicalSignificance	ReviewStatus	ConflictingInterpretations
+1001	single nucleotide variant	chr1:100-100	p.Met1Val	Disease A	Pathogenic	★★★★	0
+1002	deletion	chr1:200-250	p.Val50Asp	Disease B	Likely pathogenic	★★★	1
+1003	single nucleotide variant	chr2:300-300	p.Gly100Asp	NA	Benign	★★	0
+1004	insertion	chr3:400-401	p.frameshift	Disease C	Pathogenic	★	2
+1005	single nucleotide variant	chr4:500-500	p.Pro50Ala	Disease A	Likely pathogenic	★★★★	0
+1006	duplication	chr5:600-650	NA	Disease D	Benign	★★	0
+1007	single nucleotide variant	chr6:700-700	p.Lys200Asn	Disease E	Pathogenic	★★★★	1
+1008	deletion	chr7:800-850	p.frameshift2	NA	Pathogenic	★★★	0
+1009	single nucleotide variant	chr8:900-900	p.Trp350Cys	Disease F	Benign	★	0
+1010	insertion	chr9:1000-1001	p.frameshift3	Disease G	Likely pathogenic	★★	2
