@@ -134,20 +134,35 @@ class QuiltPackager:
         return pkg
 
     def push_to_registry(self, pkg: quilt3.Package) -> bool:
-        """Push package to S3 registry.
+        """Push package to S3 registry or build locally.
+
+        When push_to_registry is enabled, pushes to S3 registry.
+        When disabled, builds package locally (~/.quilt/packages).
 
         Args:
             pkg: Quilt Package object
 
         Returns:
-            True if push was successful or skipped
+            True if push/build was successful
 
         Raises:
-            Exception: If push fails
+            Exception: If push/build fails
         """
         if not self.push_enabled:
-            logger.info("Push to registry is disabled in configuration")
-            return True
+            logger.info("Building package locally (push to registry is disabled)")
+            try:
+                # Build locally to ~/.quilt/packages
+                pkg.build(
+                    name=self.package_name,
+                    message=f"ClinVar release {self.package_name}",
+                )
+                logger.info(
+                    f"Package built locally: ~/.quilt/packages/{self.package_name}"
+                )
+                return True
+            except Exception as e:
+                logger.error(f"Failed to build package locally: {e}")
+                raise
 
         logger.info(f"Pushing package to registry: {self.registry}")
 
