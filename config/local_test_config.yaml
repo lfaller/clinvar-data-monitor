@@ -1,0 +1,45 @@
+# ClinVar Data Quality Monitor - Local Storage Test Configuration
+# This configuration uses local storage instead of S3 for testing
+# the fallback behavior when push_to_registry is disabled
+
+clinvar:
+  source_url: "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz"
+  checksum_url: "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz.md5"
+  download_dir: "data/downloads"
+
+filtering:
+  enabled: false
+  chromosomes: null
+  clinical_significance_filter: null
+
+quilt:
+  # S3 bucket configuration (still defined but not used)
+  bucket: "lina-quilt-demo"
+  package_name: "biodata/clinvar-local-test"
+  registry: "s3://lina-quilt-demo"
+
+  # Key setting: use local storage instead of S3
+  push_to_registry: false
+
+quality:
+  thresholds:
+    min_quality_score: 75
+    max_null_percentage: 15
+    max_conflict_rate: 5
+    max_drift_percentage: 20
+  output_dir: "output/quality_reports"
+
+alerts:
+  enabled: false
+  email: null
+  slack_webhook: null
+
+scheduling:
+  check_interval_days: 7
+  auto_run: false
+
+logging:
+  level: "INFO"
+  log_dir: "logs"
+  file_logging: true
+  console_logging: true

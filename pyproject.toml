@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "clinvar-data-monitor"
-version = "0.2.0"
+version = "0.2.1"
 description = "Automated data quality monitoring for ClinVar with Quilt versioning"
 authors = ["Lina Faller <lina.faller@gmail.com>"]
 readme = "README.md"
