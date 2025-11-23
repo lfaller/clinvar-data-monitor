@@ -7,8 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2025-11-23
+
 ### Added
-- Nothing yet
+
+#### Testing & Development
+- **Demo Pipeline** (`scripts/run_demo_pipeline.py`)
+  - Run full pipeline workflow with sample data (914 bytes) instead of 3.7GB download
+  - Configurable storage backends via `--config` argument
+  - Supports both S3 and local storage modes
+  - Perfect for rapid development and CI/CD testing
+
+- **S3 Integration Tests** (`scripts/test_s3_integration.py`)
+  - Comprehensive integration test suite for S3 backend
+  - 4 test suites: bucket access, metadata retrieval, package contents, local storage fallback
+  - Exit codes: 0 for success, 1 for failure
+  - Enables validation of S3 configuration and registry connectivity
+
+- **Test Configurations**
+  - `config/demo_config.yaml`: Demo pipeline with S3 storage
+  - `config/local_test_config.yaml`: Demo pipeline with local storage fallback
+
+### Benefits
+- Develop and test without downloading large datasets
+- Validate S3 setup without waiting for 3.7GB uploads
+- Test local storage fallback (offline mode)
+- Rapid iteration on pipeline features
+- All features tested with sample data in seconds
 
 ## [0.2.0] - Phase 1: Foundation - 2025-11-21
 

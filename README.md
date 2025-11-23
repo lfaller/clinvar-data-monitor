@@ -88,10 +88,14 @@ clinvar-data-monitor/
 │   ├── drift_detector.py          # Version comparison & drift detection
 │   └── visualizer.py              # Visualization & reporting
 ├── config/
-│   └── config.yaml.template       # Configuration template
+│   ├── config.yaml.template           # Configuration template
+│   ├── demo_config.yaml               # Demo pipeline with S3 config
+│   └── local_test_config.yaml         # Demo pipeline with local storage config
 ├── scripts/
-│   ├── run_pipeline.py            # Main orchestration script
-│   └── analyze_history.py         # Historical analysis & visualization
+│   ├── run_pipeline.py                # Main orchestration script
+│   ├── run_demo_pipeline.py           # Demo pipeline with sample data
+│   ├── test_s3_integration.py         # S3 integration tests
+│   └── analyze_history.py             # Historical analysis & visualization
 ├── tests/
 │   └── test_quality_checker.py    # Unit tests
 ├── notebooks/
@@ -250,7 +254,29 @@ poetry run python scripts/run_pipeline.py --phase 2
 poetry run python scripts/run_pipeline.py --phase 3
 ```
 
-For testing the pipeline with sample data (without actual downloads):
+#### Demo Pipeline with S3 Integration Testing
+
+For complete pipeline testing with sample data (quality assessment + packaging + S3/local storage):
+
+```bash
+# Run demo pipeline with S3 storage (default)
+poetry run python scripts/run_demo_pipeline.py
+
+# Run demo pipeline with local storage (no S3 required)
+poetry run python scripts/run_demo_pipeline.py --config config/local_test_config.yaml
+
+# Run S3 integration tests to verify bucket connectivity
+poetry run python scripts/test_s3_integration.py
+```
+
+The demo pipeline:
+- Uses sample data (914 bytes) for instant execution
+- Performs full workflow: quality assessment → package creation → storage
+- Validates S3 configuration and registry access
+- Tests local storage fallback (offline mode)
+- Completes in seconds (vs 10+ minutes for full pipeline)
+
+For testing the full pipeline with actual ClinVar data:
 
 ```bash
 # Use the test configuration
