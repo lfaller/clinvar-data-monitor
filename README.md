@@ -188,15 +188,25 @@ The sample quality report is saved to: `output/quality_reports/quality_report_YY
 cat output/quality_reports/quality_report_*.json | python -m json.tool
 ```
 
-#### Sample Data Location
+#### Sample Data & Package Storage
 
-Sample ClinVar variants are included at: `data/sample_variant_summary.txt`
+**Sample Data Location**: `data/sample_variant_summary.txt`
 
 The sample dataset contains:
 - 10 realistic ClinVar variants
 - Full set of columns: VariationID, Type, Locations, Protein Change, Symptom(s), ClinicalSignificance, ReviewStatus, ConflictingInterpretations
 - Mix of pathogenic/benign classifications
 - Varying review status (1-4 stars)
+
+**Quilt Package Storage**:
+- **Local (testing)**: When `push_to_registry: false`, packages are built locally in Quilt's registry
+  - Access via: `quilt3.Package.browse("namespace/package_name")`
+  - Storage: Managed by Quilt internally
+
+- **S3 Registry (production)**: When `push_to_registry: true` and AWS credentials are configured
+  - Pushed to S3 bucket specified in config
+  - Requires AWS credentials (Access Key ID + Secret Key)
+  - No credentials needed for local testing mode
 
 ### Running Tests
 
