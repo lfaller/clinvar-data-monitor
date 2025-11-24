@@ -1,5 +1,11 @@
 # ClinVar Data Quality Monitor
 
+> **📦 Project Status: ARCHIVED**
+>
+> This is a historical reference implementation demonstrating a data quality monitoring system using Quilt for versioning. The project was archived because the ClinVar dataset (4 GB) is too large for a cost-effective ongoing monitoring example. For an active, low-cost example using climate data, see the [climate-data-monitor](https://github.com/linafaller/climate-data-monitor) repository.
+>
+> **What works:** Phases 1-2 are fully implemented and tested. All 81 tests pass. See [FINAL_STATUS.md](FINAL_STATUS.md) for details.
+
 An automated data quality monitoring system for ClinVar genetic variant data using Quilt for versioning, with the ability to track quality metrics over time, detect data drift, and enable quick rollback to previous versions.
 
 ## Quick Start

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [ARCHIVED] - 2025-11-24
+
+### Status: Project Archived
+
+This project is now archived as a historical reference implementation. See [FINAL_STATUS.md](FINAL_STATUS.md) for complete details.
+
+**Why:** The ClinVar dataset (4 GB per release) makes ongoing S3 monitoring cost-prohibitive for a demonstration project. The team has pivoted to [climate-data-monitor](https://github.com/linafaller/climate-data-monitor), which applies the same architectural patterns (Quilt versioning, quality assessment, drift detection) to a smaller dataset (100-200 MB per release).
+
+**What's Preserved:** Phases 1-2 are fully implemented and tested (81 tests passing). All code, architecture, and patterns are available for reference or adaptation to other datasets.
+
 ## [0.2.1] - 2025-11-23
 
 ### Added

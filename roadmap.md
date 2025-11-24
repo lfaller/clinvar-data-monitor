@@ -203,6 +203,13 @@
 ### **Phase 3: Automation & Monitoring** (Week 3)
 *Goal: Productionize with automation, alerts, and visualization*
 
+**Status:** ❌ NOT IMPLEMENTED - Project Archived
+
+**Reason for Non-Implementation:**
+The ClinVar dataset is 4 GB per release, making the cost of S3 storage and bandwidth impractical for an ongoing demonstration project. Rather than scaling down to toy datasets, the team pivoted to the [climate-data-monitor](https://github.com/linafaller/climate-data-monitor) project, which uses smaller datasets (100-200 MB) while preserving all the architectural patterns and Quilt integration demonstrated here.
+
+See [FINAL_STATUS.md](FINAL_STATUS.md) for complete archival details.
+
 **Milestone:** Fully automated monthly pipeline with monitoring
 
 #### Tasks:
