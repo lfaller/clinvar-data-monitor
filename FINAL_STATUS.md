@@ -99,7 +99,7 @@ This design is portable to other datasets.
 ### The Right Solution: Use Smaller Datasets
 This implementation is solid and reusable, but ClinVar is fundamentally too large for a cost-effective ongoing monitoring example. The solution wasn't to abandon Quilt versioning—it was to apply this excellent pattern to a smaller dataset.
 
-**Result:** The team pivoted to [climate-data-monitor](https://github.com/linafaller/climate-data-monitor), which uses NOAA climate data (~100-200 MB per release) while keeping all the same architectural patterns.
+**Result:** The team pivoted to [climate-data-monitor](https://github.com/lfaller/climate-data-monitor), which uses NOAA climate data (~100-200 MB per release) while keeping all the same architectural patterns.
 
 ---
 
